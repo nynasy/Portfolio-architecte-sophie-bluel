@@ -13,6 +13,9 @@ class Category {
     }
 }
 
+let currentCategoryId = 0;
+    
+
 //Catégorie 'Tous' pour afficher tous les travaux
 const categoryAll = new Category(0, "Tous");
 
@@ -69,14 +72,26 @@ fetch("http://localhost:5678/api/categories")
         span.classList.add("filter-title");
         span.innerText = category.name;
         // on ajoute l'élément span à la div "filter-title"
-        document.querySelector(".filters").appendChild(span);	
+        document.querySelector(".filters").appendChild(span);
+
         span.onclick = function () {
             console.log("clique sur la categorie " + category.name);
             loadWorks(category);
+            selectCategory(category);
         } 
     }
+    selectCategory(categoryAll);
 });
+function selectCategory(category){
+  let filterSpans = document.querySelector(".filters").children;
+    for(let span of filterSpans){
+        span.classList.remove("filter-selected");
+        if(span.innerText === category.name){
+            span.classList.add("filter-selected");
+        }
+    }
 
+}
 
  
 
