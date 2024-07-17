@@ -1,3 +1,26 @@
+
+let token = localStorage.getItem("token");
+let loginMenu =  document.getElementById("login");
+let logoutMenu =  document.getElementById("logout");
+
+loginMenu.onclick=function(){
+    window.location.href = "login.html";
+}
+
+logoutMenu.onclick=function(){
+    localStorage.clear();
+    location.reload();
+}
+
+if(token){
+    loginMenu.style.display= "none";
+    logoutMenu.style.display= "block";
+}
+else{
+    loginMenu.style.display= "block";
+    logoutMenu.style.display= "none";
+}
+
 //class Work pour créer des objets de type travaux
 class Work {
     constructor(jsonWork){
@@ -89,9 +112,37 @@ function selectCategory(category){
         if(span.innerText === category.name){
             span.classList.add("filter-selected");
         }
-    }
-
+    }    
 }
+
+const modal = document.querySelector(".modal");
+const editButton = document.querySelector("#editProject span");
+editButton.addEventListener("click", (event) => { 
+    event.preventDefault();
+    modal.style.display = "block";    
+
+});
+
+const closeButton = document.querySelector(".modal .fa-close");
+closeButton.addEventListener("click", (event) => { 
+    event.preventDefault();
+    modal.style.display = "none"; 
+});   
+
+
+document.addEventListener("click", function(event) {   
+    event.preventDefault();      
+    if (!event.target.closest("#modal,#editProject span")) {
+        modal.style.display = "none";   
+    }
+});
+  
+
+ 
+    
+
+
+
 
  
 

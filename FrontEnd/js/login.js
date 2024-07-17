@@ -33,13 +33,12 @@ form.addEventListener("submit", (event) => {
         //reponse OK
         if(responseJson.status === 200){
             console.log("Response token : " + responseJson.body.token);
+            localStorage.setItem("token", responseJson.body.token);
             window.location.href = "index.html";
-
         } 
 
         else if(responseJson.status === 401){
-            alert("Utilisateur non autorisé");
-        
+            alert("Combinaison utilisateur mot de passe incorrect");        
         } 
         
         else if(responseJson.status === 404){

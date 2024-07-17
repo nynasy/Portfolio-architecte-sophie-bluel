@@ -219,3 +219,45 @@ footer nav ul {
 	text-align: center;
 	
 }
+
+
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 30%;
+  	left: 30%;
+	background-color: rgba(0, 0, 0, 0.08); 
+
+}
+
+.modal-wrapper {
+	overflow-y: auto;
+	width: 630px;
+	height: 688px;
+	max-width: calc(100vw - 20px);
+	padding: 20px;
+	background-color: #fff;
+}
+
+#portfolio #editProject {
+	display: flex; 
+	justify-content: center;
+  }
+  
+  #portfolio .fa-edit {
+	margin-top: 12px; 
+	padding-left: 20px;
+	padding-right: 5px;
+  }
+
+  #modal span {
+	justify-content: right;
+	display: flex; 
+
+  }
+
+
+
+

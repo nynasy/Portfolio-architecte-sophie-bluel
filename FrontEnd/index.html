@@ -7,8 +7,9 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/style.css">	
 	<script type="module" src="./js/script.js"></script>
 </head>
 <body>
@@ -18,7 +19,8 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li id="login">login</li>  
+			<li id="logout">logout</li>  
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -36,11 +38,19 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div id="editProject">
+			<h2>Mes Projets</h2>
+			<span><i class="fa fa-edit"></i>modifier</span>			
+  		</div>		
+		<aside id ="modal" class="modal" style="display: none;">
+			<div class="modal-wrapper">	
+				<span><i class="fa fa-close"></i></span>
+			</div>
+		</aside>
 		<div class= "filters"> 
 		</div>
-	<div class="gallery">		
-	</div>
+		<div class="gallery">		
+		</div>
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>
