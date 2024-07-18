@@ -38,7 +38,7 @@ form.addEventListener("submit", (event) => {
         } 
 
         else if(responseJson.status === 401){
-            alert("Combinaison utilisateur mot de passe incorrect");        
+            alert("Erreur dans l’identifiant ou le mot de passe");        
         } 
         
         else if(responseJson.status === 404){

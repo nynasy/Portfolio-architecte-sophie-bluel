@@ -43,21 +43,41 @@ let currentCategoryId = 0;
 const categoryAll = new Category(0, "Tous");
 
 //au chargement de la page on affiche tous les travaux avec Catégorie 'Tous'
-loadWorks(categoryAll);
+displayWorks(categoryAll);
 
-//Fonction de chargement et d'affichage des travaux filtrés par la catégorie passée en paramétre
-function loadWorks(category){
-    console.log("loadWorks  + category : " + category.name);
-    //on efface les travaux dans le html
-    document.querySelector(".gallery").innerHTML = "";
+//Fonction de chargement des works
+function loadWorks(){
+    console.log("loadWorks");
+
     //on recupere les travaux (string)
-    fetch("http://localhost:5678/api/works")
+    let listWorks = fetch("http://localhost:5678/api/works")
     //on transforme les travaux (string) en json 
     .then(data => data.json())
     //on transforme les travaux json en objets de type Work
     .then(listJsonWork => {
+        let listWorks = [];       
         for(let jsonWork of listJsonWork){
-            let work = new Work(jsonWork);
+            let work = new Work(jsonWork);   
+            listWorks.push(work);       
+        }
+        console.log("listWorks : " + listWorks);
+        return listWorks;
+    });
+
+    return listWorks;
+}
+
+
+function displayWorks(category){
+    console.log("displayWorks  + category : " + category.name);
+
+    //on efface les travaux dans le html
+    document.querySelector(".gallery").innerHTML = "";
+
+    //on appelle la fonction de chargement des works
+    loadWorks()
+    .then (listWorks => { 
+        for(let work of listWorks){
             //console.log(work);  
             //on n'affiche le travail que si la catégorie sélectionnée est 'Tous' 
             //OU si la catégorie sélectionnée est égale à la catégorie du travail       
@@ -71,6 +91,37 @@ function loadWorks(category){
         }
     });
 }
+
+function displayWorksModal(){
+    console.log("displayWorksModal...");
+
+    //on efface les travaux dans le html
+    document.querySelector(".images").innerHTML = "";
+
+    //on appelle la fonction de chargement des works
+    loadWorks()
+    .then (listWorks => { 
+        for(let work of listWorks){                      
+            document.querySelector(".images").innerHTML +=
+                `<div class="imageItem">
+                    <img src=${work.imageUrl} alt=${work.title} >
+                    <i class="fa fa-trash"></i>
+				</div>`  
+                let div = document.createElement("div");  
+                div.classList.add("imageItem");
+
+                let img = document.createElement("img");
+                img.src = work.imageUrl;
+                img.alt = work.title;
+                img.id = work.id;
+
+                let i = document.createElement("icon");
+                i.classList.add("fa","fa-trash");
+                
+        }
+    });
+}
+
 
 //on recupere les categories (string)
 fetch("http://localhost:5678/api/categories")
@@ -99,7 +150,7 @@ fetch("http://localhost:5678/api/categories")
 
         span.onclick = function () {
             console.log("clique sur la categorie " + category.name);
-            loadWorks(category);
+            displayWorks(category);
             selectCategory(category);
         } 
     }
@@ -119,7 +170,8 @@ const modal = document.querySelector(".modal");
 const editButton = document.querySelector("#editProject span");
 editButton.addEventListener("click", (event) => { 
     event.preventDefault();
-    modal.style.display = "block";    
+    modal.style.display = "block"; 
+    displayWorksModal();   
 
 });
 

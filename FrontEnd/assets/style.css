@@ -226,9 +226,9 @@ footer nav ul {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	top: 30%;
+	top: 15%;
   	left: 30%;
-	background-color: rgba(0, 0, 0, 0.08); 
+	background-color: rgba(0, 0, 0, 0.08); 	
 
 }
 
@@ -239,6 +239,7 @@ footer nav ul {
 	max-width: calc(100vw - 20px);
 	padding: 20px;
 	background-color: #fff;
+	padding: 85px;
 }
 
 #portfolio #editProject {
@@ -255,9 +256,51 @@ footer nav ul {
   #modal span {
 	justify-content: right;
 	display: flex; 
-
   }
 
+  .images {
+	display: flex; 
+	justify-content: space-between;	
+	flex-wrap: wrap;
+	
+  }
+
+
+  .images img {
+	display: block;
+	width: 100%;
+	height: 100%;
+  }
+
+  .deleteWorks {
+	display: flex ;	
+	flex-direction: column;	
+	
+  }
+
+  hr {	
+	width: 100% ;
+  }
+
+.imageItem { 
+	width: 19%;	
+	padding-bottom: 20px;	
+	position: relative; 
+}
+
+.imageItem img { 
+	display: block; 
+}
+
+.imageItem .fa-trash {
+	position: absolute; 
+	top: 5px;
+	right:5px;
+	color: white;	
+	background-color: black;
+}
+
+  
 
 
 
