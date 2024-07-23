@@ -137,31 +137,31 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
+#contact, #login {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+#contact > *, #login > * {
 	text-align: center;
-
 }
-#contact h2{
+
+#contact h2, #login h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form, #login form, .addWorks form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input, #login input, .addWorks input, .addWorks select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label, #login label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -185,4 +185,157 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
+.filters {
+	margin-top:20px;
+	margin-bottom:20px;
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.filter-title {
+	top: 813px;
+	left: 427px;
+	gap: 0px;
+	border-radius: 60px;
+	border: 1px solid #1D6154 ;
+	opacity: 0px;
+	margin-right: 10px;
+    padding: 15px;
+	color: #1D6154;
+	border-color: #1D6154;
+	font-family: 'Syne';
+	font-size: 16px;
+}
+
+.filter-selected {
+	color: white;
+	background-color: #1D6154;
+}
+
+#login p {
+	text-align: center;
+	
+}
+
+
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 15%;
+  	left: 30%;
+	background-color: rgba(0, 0, 0, 0.08); 	
+
+}
+
+.modal-wrapper {
+	overflow-y: auto;
+	width: 630px;
+	height: 688px;
+	max-width: calc(100vw - 20px);
+	padding: 20px;
+	background-color: #fff;
+	padding: 85px;
+}
+
+#portfolio #editProject {
+	display: flex; 
+	justify-content: center;
+  }
+  
+  #portfolio .fa-edit {
+	margin-top: 12px; 
+	padding-left: 20px;
+	padding-right: 5px;
+  }
+
+  #modal #icon-close {
+	justify-content: right;
+	display: flex; 
+  }
+
+  #modal .fa-close {
+	font-size: 30px;
+  }
+
+  .images {
+	display: flex; 
+	justify-content: space-between;	
+	flex-wrap: wrap;
+	
+  }
+
+
+  .images img {
+	display: block;
+	width: 100%;
+	height: 100%;
+  }
+
+  .deleteWorks {
+	display: flex ;	
+	flex-direction: column;	
+	
+  }
+
+  hr {	
+	width: 100% ;
+  }
+
+.imageItem { 
+	width: 19%;	
+	padding-bottom: 20px;	
+	position: relative; 
+}
+
+.imageItem img { 
+	display: block; 
+}
+
+.imageItem .fa-trash {
+	position: absolute; 
+	top: 5px;
+	right:5px;
+	color: white;	
+	background-color: black;
+}
+
+.image {
+	display: flex ;	
+	flex-direction: column;	
+	background-color:#E8F1F6;
+	align-items: center;
+	padding: 40px;
+
+}
+
+.addWorks form  label {
+	margin-bottom: 10px;
+}
+
+.addWorks form  > * {
+	margin-bottom: 30px;
+}
+
+.image .fa-image {
+	background-color:#E8F1F6;
+	color:#C4C4C4;
+	font-size: 76px;
+}
+
+.image input[type="submit"] {
+	background-color:#C4C4C4;
+	color: #306685;
+
+}
+
+
+
+  
+
+
 
