@@ -14,9 +14,23 @@ class Category {
 }
 
 
-let token = localStorage.getItem("token");
-let loginMenu =  document.getElementById("login");
-let logoutMenu =  document.getElementById("logout");
+const token = localStorage.getItem("token");
+const loginMenu =  document.getElementById("login");
+const logoutMenu =  document.getElementById("logout");
+const filters = document.querySelector(".filters");
+const modal = document.querySelector(".modal");
+const editButton = document.querySelector("#editProject span");
+const deleteWorks = document.querySelector(".deleteWorks");
+const addWorks = document.querySelector(".addWorks");
+const addButton = document.querySelector(".deleteWorks input");
+const chooseFile = document.querySelector("#fileId");
+const addImage = document.querySelector("#addImage");
+const upload = document.querySelector("#upload");  
+const imagePreview = document.querySelector("#imagePreview");    
+const arrowLeft = document.querySelector("#icon-arrow-left");  
+const formAddImage = document.querySelector(".addWorks form");
+const editionMode = document.querySelector("#editionMode");
+
 
 loginMenu.onclick=function(){
     window.location.href = "login.html";
@@ -30,10 +44,15 @@ logoutMenu.onclick=function(){
 if(token){
     loginMenu.style.display= "none";
     logoutMenu.style.display= "block";
-}
-else{
+    filters.style.display= "none";
+    editButton.style.display= "block";
+    editionMode.style.display= "flex";
+} else {
     loginMenu.style.display= "block";
     logoutMenu.style.display= "none";
+    editButton.style.display= "none";
+    filters.style.display= "flex";
+    editionMode.style.display= "none";
 }
 
 let currentCategoryId = 0;
@@ -205,26 +224,14 @@ function displayCategoryModal(){
     //on recupere les categories (string)
     loadCategories()
     //on crée les filtres de catégorie
-    .then(listCategory => {	
-        let listCategoryWithAll = [new Category(0, "Tous")];
-        listCategoryWithAll.push(...listCategory);
-        console.log("listCategoryWithAll : " + listCategoryWithAll);         
-        for(let category of listCategoryWithAll){  
-            // on crée une balise span
-            let span = document.createElement("span");
-            // on lui ajoute la class "filter-title"
-            span.classList.add("filter-title");
-            span.innerText = category.name;
-            // on ajoute l'élément span à la div "filter-title"
-            document.querySelector(".filters").appendChild(span);
-
-            span.onclick = function () {
-                console.log("clique sur la categorie " + category.name);
-                displayWorks(category);
-                selectCategory(category);
-            } 
+    .then(listCategory => {	      
+        console.log("listCategory : " + listCategory);   
+        let selectCategory = document.querySelector("#category");
+        selectCategory.innerHTML = `<option value=""></option>`;     
+        for(let category of listCategory){             
+            selectCategory.innerHTML += `<option value=${category.id}>${category.name}</option>`;  
         }
-        selectCategory(categoryAll);
+        
     });
 }
 
@@ -239,26 +246,99 @@ function selectCategory(category){
     }    
 }
 
-const modal = document.querySelector(".modal");
-const editButton = document.querySelector("#editProject span");
-const deleteWorks = document.querySelector(".deleteWorks");
-const addWorks = document.querySelector(".addWorks");
-const addButton = document.querySelector(".deleteWorks input");
+
+formAddImage.addEventListener("submit", (event) => {
+    // On empêche le comportement par défaut
+    event.preventDefault();
+    console.log("formulaire d'ajout de photo soumis");
+    
+    // On récupère les deux champs et on affiche leur valeur
+    const title = document.getElementById("title").value;
+    const category = document.getElementById("category").value;
+    const file = chooseFile.files[0];
+    console.log(file);
+    console.log(title);
+    console.log(category);
+  
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("title", title);
+    formData.append("category", category);
+
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            "Authorization": "Bearer " + token
+        },
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error(response.status);
+        }
+      })
+      .then(data => {        
+        console.log('Server response:', data);
+        alert("Ajout d'image réussi");
+        displayWorksModal();
+        displayWorks(categoryAll);
+      })
+      .catch(error => {
+        console.error('Error uploading file:', error);
+        alert("Erreur lors de l'ajout de l'image : " + error);
+      });    
+
+    });
+
 
 editButton.addEventListener("click", (event) => { 
     event.preventDefault();
-    modal.style.display = "block"; 
-    deleteWorks.style.display = "block"; 
+    modal.style.display = "flex"; 
+    deleteWorks.style.display = "flex"; 
     addWorks.style.display = "none"; 
+    arrowLeft.style.visibility = "hidden";    
     displayWorksModal();   
 
-})
+});
 
 addButton.onclick=function(){
     deleteWorks.style.display = "none"; 
     addWorks.style.display = "block"; 
+    arrowLeft.style.visibility = "visible";
+    displayCategoryModal();
+}
+
+arrowLeft.onclick=function(){
+    deleteWorks.style.display = "flex"; 
+    addWorks.style.display = "none"; 
 
 }
+
+imagePreview.onclick=function(){
+    chooseFile.click();
+}
+
+
+addImage.onclick=function(){
+    chooseFile.click();
+}
+
+const previewImage = () => {
+    const file = chooseFile.files;
+    if (file) {
+        const fileReader = new FileReader();
+        fileReader.onload = function (event) {
+            imagePreview.setAttribute('src', event.target.result);
+        }
+        fileReader.readAsDataURL(file[0]);
+        
+        imagePreview.style.display = "block"; 
+        upload.style.display = "none"; 
+    }
+}
+chooseFile.addEventListener("change", previewImage);
 
 const closeButton = document.querySelector(".modal .fa-close");
 closeButton.addEventListener("click", (event) => { 
@@ -268,12 +348,13 @@ closeButton.addEventListener("click", (event) => {
 
 
 document.addEventListener("click", function(event) {   
-    event.preventDefault();      
+    //event.preventDefault();      
     if (!event.target.closest("#modal,#editProject span")) {
         modal.style.display = "none";   
     }
 });
   
+
 
  
     

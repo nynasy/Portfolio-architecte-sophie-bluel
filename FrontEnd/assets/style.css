@@ -135,6 +135,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
+	max-height: 488px;
 
 }
 #contact, #login {
@@ -155,7 +156,7 @@ li:hover {
 	flex-direction: column;
 }
 
-#contact input, #login input, .addWorks input, .addWorks select {
+#contact input, #login input, .deleteWorks input, .addWorks input, .addWorks select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -169,13 +170,13 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"], input[type="button"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
-	width: 180px;
+	width: 300px;
 	text-align: center;
 	border-radius: 60px ;
 }
@@ -226,7 +227,7 @@ footer nav ul {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	top: 15%;
+	top: 10%;
   	left: 30%;
 	background-color: rgba(0, 0, 0, 0.08); 	
 
@@ -235,11 +236,10 @@ footer nav ul {
 .modal-wrapper {
 	overflow-y: auto;
 	width: 630px;
-	height: 688px;
+	height: 780px;
 	max-width: calc(100vw - 20px);
-	padding: 20px;
 	background-color: #fff;
-	padding: 85px;
+	padding: 30px;
 }
 
 #portfolio #editProject {
@@ -253,19 +253,22 @@ footer nav ul {
 	padding-right: 5px;
   }
 
-  #modal #icon-close {
-	justify-content: right;
+  #navBar  {
+	justify-content: space-between;
 	display: flex; 
   }
 
-  #modal .fa-close {
+ 
+  .fa-close, .fa-arrow-left{
 	font-size: 30px;
+	
   }
 
   .images {
 	display: flex; 
-	justify-content: space-between;	
+	justify-content: flex-start;	
 	flex-wrap: wrap;
+
 	
   }
 
@@ -287,9 +290,10 @@ footer nav ul {
   }
 
 .imageItem { 
-	width: 19%;	
+	width: 17%;	
 	padding-bottom: 20px;	
 	position: relative; 
+	margin-left: 10px;
 }
 
 .imageItem img { 
@@ -302,6 +306,7 @@ footer nav ul {
 	right:5px;
 	color: white;	
 	background-color: black;
+	padding: 3px;
 }
 
 .image {
@@ -309,11 +314,20 @@ footer nav ul {
 	flex-direction: column;	
 	background-color:#E8F1F6;
 	align-items: center;
-	padding: 40px;
-
 }
 
-.addWorks form  label {
+#upload {
+	display: flex ;	
+	flex-direction: column;	
+	align-items: center;
+	padding: 40px;
+}
+
+#imagePreview {
+	max-height: 200px ;
+}
+
+.addWorks form label {
 	margin-bottom: 10px;
 }
 
@@ -321,18 +335,32 @@ footer nav ul {
 	margin-bottom: 30px;
 }
 
-.image .fa-image {
+#upload .fa-image {
 	background-color:#E8F1F6;
 	color:#C4C4C4;
 	font-size: 76px;
 }
 
-.image input[type="submit"] {
+#upload input[type="button"] {
 	background-color:#C4C4C4;
 	color: #306685;
+}
+
+#editionMode{
+	background-color: black;
+	color: white;
+	margin-bottom: 20px;
+	width: 100%;
+	height:60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 }
 
+#editionMode .fa-edit{
+	padding-right: 5px;
+}
 
 
   
