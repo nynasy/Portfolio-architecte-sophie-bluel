@@ -15,6 +15,7 @@ class Category {
 
 
 const token = localStorage.getItem("token");
+
 const loginMenu =  document.getElementById("login");
 const logoutMenu =  document.getElementById("logout");
 const filters = document.querySelector(".filters");
@@ -109,11 +110,10 @@ function loadWorks(){
 
 //fonction d'affichage des filtres de catégorie
 function displayCategoryFilters(){
-    //on recupere les categories (string)
     loadCategories()
     //on crée les filtres de catégorie
     .then(listCategory => {	
-        let listCategoryWithAll = [new Category(0, "Tous")];
+        let listCategoryWithAll = [categoryAll];
         listCategoryWithAll.push(...listCategory);
         console.log("listCategoryWithAll : " + listCategoryWithAll);         
         for(let category of listCategoryWithAll){  
@@ -282,6 +282,9 @@ formAddImage.addEventListener("submit", (event) => {
       .then(data => {        
         console.log('Server response:', data);
         alert("Ajout d'image réussi");
+        formAddImage.reset();
+        imagePreview.style.display = "none"; 
+        upload.style.display = "flex"; 
         displayWorksModal();
         displayWorks(categoryAll);
       })
@@ -313,7 +316,7 @@ addButton.onclick=function(){
 arrowLeft.onclick=function(){
     deleteWorks.style.display = "flex"; 
     addWorks.style.display = "none"; 
-
+    arrowLeft.style.visibility = "hidden";
 }
 
 imagePreview.onclick=function(){
@@ -330,12 +333,12 @@ const previewImage = () => {
     if (file) {
         const fileReader = new FileReader();
         fileReader.onload = function (event) {
-            imagePreview.setAttribute('src', event.target.result);
+            imagePreview.setAttribute("src", event.target.result);
         }
         fileReader.readAsDataURL(file[0]);
         
         imagePreview.style.display = "block"; 
-        upload.style.display = "none"; 
+        upload.style.display = "none";         
     }
 }
 chooseFile.addEventListener("change", previewImage);
