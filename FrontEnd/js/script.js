@@ -1,19 +1,3 @@
-//class Work pour créer des objets de type travaux
-class Work {
-    constructor(jsonWork){
-        jsonWork && Object.assign(this, jsonWork)
-    }
-}
-
-//class Category pour créer des objets de type catégorie
-class Category {
-    constructor(id, name){
-        this.id = id;
-        this.name = name;
-    }
-}
-
-
 const token = localStorage.getItem("token");
 
 const loginMenu =  document.getElementById("login");
@@ -32,13 +16,12 @@ const arrowLeft = document.querySelector("#icon-arrow-left");
 const formAddImage = document.querySelector(".addWorks form");
 const editionMode = document.querySelector("#editionMode");
 
-
 loginMenu.onclick=function(){
     window.location.href = "login.html";
 }
 
 logoutMenu.onclick=function(){
-    localStorage.clear();
+    localStorage.removeItem("token");
     location.reload();
 }
 
@@ -60,7 +43,7 @@ let currentCategoryId = 0;
     
 
 //Catégorie 'Tous' pour afficher tous les travaux
-const categoryAll = new Category(0, "Tous");
+const categoryAll = {"id": 0, "name": "Tous"}
 
 //on affiche les filtres de catégorie
 displayCategoryFilters();
@@ -73,16 +56,8 @@ function loadCategories(){
     //on recupere les categories (string)
     let listCategory = fetch("http://localhost:5678/api/categories")
     //on transforme les categories (string) en json 
-    .then(data => data.json())
-    //on transforme les categories json en objets de type Category
-    .then(listJsonCategory => {	     
-        let listCategory = [];
-        for(let jsonCategory of listJsonCategory){
-            let category = new Category(jsonCategory.id, jsonCategory.name);
-            listCategory.push(category);      
-        }
-        return listCategory;
-    }) ;
+    .then(data => data.json());
+  
     return listCategory;
 }
 
@@ -93,17 +68,7 @@ function loadWorks(){
     //on recupere les travaux (string)
     let listWorks = fetch("http://localhost:5678/api/works")
     //on transforme les travaux (string) en json 
-    .then(data => data.json())
-    //on transforme les travaux json en objets de type Work
-    .then(listJsonWork => {
-        let listWorks = [];       
-        for(let jsonWork of listJsonWork){
-            let work = new Work(jsonWork);   
-            listWorks.push(work);       
-        }
-        console.log("listWorks : " + listWorks);
-        return listWorks;
-    });
+    .then(data => data.json());
 
     return listWorks;
 }
@@ -144,8 +109,8 @@ function displayWorks(category){
 
     //on appelle la fonction de chargement des works
     loadWorks()
-    .then (listWorks => { 
-        for(let work of listWorks){
+    .then (listJsonWorks => { 
+        for(let work of listJsonWorks){
             //console.log(work);  
             //on n'affiche le travail que si la catégorie sélectionnée est 'Tous' 
             //OU si la catégorie sélectionnée est égale à la catégorie du travail       
@@ -258,7 +223,7 @@ formAddImage.addEventListener("submit", (event) => {
     const file = chooseFile.files[0];
     console.log(file);
     console.log(title);
-    console.log(category);
+    console.log(category);   
   
     const formData = new FormData();
     formData.append("image", file);
@@ -338,7 +303,7 @@ const previewImage = () => {
         fileReader.readAsDataURL(file[0]);
         
         imagePreview.style.display = "block"; 
-        upload.style.display = "none";         
+        upload.style.display = "none";  
     }
 }
 chooseFile.addEventListener("change", previewImage);
@@ -357,13 +322,3 @@ document.addEventListener("click", function(event) {
     }
 });
   
-
-
- 
-    
-
-
-
-
- 
-
