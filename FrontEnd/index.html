@@ -7,17 +7,23 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/style.css">	
+	<script type="module" src="./js/script.js"></script>
 </head>
 <body>
-<header>
+	<div id="editionMode">
+		<span><i class="fa fa-edit"></i>Mode édition</span>	
+	</div>	
+<header>	
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li id="login">login</li>  
+			<li id="logout">logout</li>  
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -35,52 +41,56 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
+		<div id="editProject">
+			<h2>Mes Projets</h2>
+			<span><i class="fa fa-edit"></i>modifier</span>			
+  		</div>		
+		<aside id ="modal" class="modal" style="display: none;">			
+			<div class="modal-wrapper">	
+				<div id="navBar">
+					<span id="icon-arrow-left"><i class="fa fa-arrow-left"></i></span>
+					<span id="icon-close"><i class="fa fa-close"></i></span>
+				</div>
+				
+				<div class="deleteWorks" style="display: none;">
+					<h2>Galerie photo</h2>
+					<div class="images">
+																										
+					</div>
+					<hr />
+					<input type="submit" value="Ajouter une photo">
+				</div>
+
+				<div class="addWorks">
+					<h2>Ajout photo</h2>					
+					<form>
+						<div class="image">								
+							<img src="#" alt="Preview Uploaded Image" id="imagePreview" style="display: none;">										
+							<div id="upload">									
+								<span><i class="fa fa-image"></i></span>
+								<input id="fileId" type="file" accept="image/png, image/jpeg" required/>							
+								<input id="addImage" type="button" value="+ Ajouter photo"/>
+								<p>jpg, png: 4mo max</p>	
+							</div>					
+						</div>
+					
+						<label for="title">Titre</label>
+						<input type="text" name="titre" id="title" required>		
+						<label for="category">Catégorie</label>
+						<select name="category" id="category" required>							
+						</select>				
+						<hr />
+						<input type="submit" value="Valider">
+					</form>				
+				</div>
+			</div>
+
+			
+		</aside>
+		<div class= "filters"> 
+		</div>
+		<div class="gallery">	
+
 		</div>
 	</section>
 	<section id="contact">
@@ -105,5 +115,6 @@
 		</ul>
 	</nav>
 </footer>
+
 </body>
 </html>
