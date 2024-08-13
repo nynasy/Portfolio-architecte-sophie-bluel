@@ -1,4 +1,3 @@
-
 const token = localStorage.getItem("token");
 
 const loginMenu =  document.getElementById("login");
@@ -323,13 +322,3 @@ document.addEventListener("click", function(event) {
     }
 });
   
-
-
- 
-    
-
-
-
-
- 
-
